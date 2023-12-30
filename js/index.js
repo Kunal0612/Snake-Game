@@ -8,6 +8,7 @@ let medium=12;
 let hard = 20;
 let speed=12;
 let score = 0;
+let hiscoreval=0;
 let lastPaintTime = 0;
 let snakeArr = [
     {x: 13, y: 15}
@@ -18,6 +19,8 @@ food = {x: 6, y: 7};
 const easyButton = document.getElementById('easyButton');
 const mediumButton = document.getElementById('mediumButton');
 const hardButton = document.getElementById('hardButton');
+const hiscoreBox = document.getElementById('hiscoreBox');
+const scoreBox = document.getElementById('scoreBox');
 easyButton.addEventListener('click', function() {
     speed=easy;
 });
@@ -64,29 +67,32 @@ function gameEngine(){
         snakeArr = [{x: 13, y: 15}];
         musicSound.play();
         score = 0; 
+        scoreBox.innerHTML = "Score: " + score;
     }
-
+    // if you have eaten the food the increase the score and regenarate the food
     if(snakeArr[0].y === food.y && snakeArr[0].x ===food.x){
         foodSound.play();
         score += 1;
         if(score>hiscoreval){
             hiscoreval = score;
-            localStorage.setItem("hiscore", JSON.stringify(hiscoreval));
+            localStorage.setItem("Highscore", JSON.stringify(hiscoreval));
             hiscoreBox.innerHTML = "HighScore: " + hiscoreval;
         }
         scoreBox.innerHTML = "Score: " + score;
         snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
         let a = 2;
-        let b = 16;
+        let b = 17;
         food = {x: Math.round(a + (b-a)* Math.random()), y: Math.round(a + (b-a)* Math.random())}
     }
-
+    // moving the snake 
     for (let i = snakeArr.length - 2; i>=0; i--) { 
         snakeArr[i+1] = {...snakeArr[i]};
     }
 
     snakeArr[0].x += inputDir.x;
     snakeArr[0].y += inputDir.y;
+
+    // Display the snake
 
     board.innerHTML = "";
     snakeArr.forEach((e, index)=>{
@@ -102,7 +108,9 @@ function gameEngine(){
         }
         board.appendChild(snakeElement);
     });
-    
+
+    // display the food
+
     foodElement = document.createElement('div');
     foodElement.style.gridRowStart = food.y;
     foodElement.style.gridColumnStart = food.x;
@@ -121,7 +129,7 @@ if(hiscore === null){
 }
 else{
     hiscoreval = JSON.parse(hiscore);
-    hiscoreBox.innerHTML = "HighScore: " + hiscore;
+    hiscoreBox.innerHTML = "HighScore: " + hiscoreval;
 }
 
 window.requestAnimationFrame(main);
