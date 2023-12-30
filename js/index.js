@@ -26,14 +26,14 @@ const Pause = document.getElementById('Pause');
 let f=0;
 
 Pause.addEventListener('click', function() {
-    if(f===0) {
+    if(f===1) {
         musicSound.pause();
-        f=1;
+        f=0;
         Pause.innerHTML='Play'
     }
     else {
         musicSound.play();
-        f=0;
+        f=1;
         Pause.innerHTML='Pause'
     }
 });
