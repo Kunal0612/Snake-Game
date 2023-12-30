@@ -21,6 +21,23 @@ const mediumButton = document.getElementById('mediumButton');
 const hardButton = document.getElementById('hardButton');
 const hiscoreBox = document.getElementById('hiscoreBox');
 const scoreBox = document.getElementById('scoreBox');
+const Pause = document.getElementById('Pause');
+
+let f=0;
+
+Pause.addEventListener('click', function() {
+    if(f===0) {
+        musicSound.pause();
+        f=1;
+        Pause.innerHTML='Play'
+    }
+    else {
+        musicSound.play();
+        f=0;
+        Pause.innerHTML='Pause'
+    }
+});
+
 easyButton.addEventListener('click', function() {
     speed=easy;
 });
@@ -65,7 +82,7 @@ function gameEngine(){
         inputDir =  {x: 0, y: 0}; 
         alert("Game Over. Press any key to play again!");
         snakeArr = [{x: 13, y: 15}];
-        musicSound.play();
+        // musicSound.play();
         score = 0; 
         scoreBox.innerHTML = "Score: " + score;
     }
@@ -121,7 +138,7 @@ function gameEngine(){
 }
 
 
-musicSound.play();
+// musicSound.play();
 let hiscore = localStorage.getItem("Highscore");
 if(hiscore === null){
     hiscoreval = 0;
