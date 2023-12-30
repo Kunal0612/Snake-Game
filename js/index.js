@@ -37,18 +37,26 @@ Pause.addEventListener('click', function() {
         Pause.innerHTML='Pause'
     }
 });
+let s=0;
 
 easyButton.addEventListener('click', function() {
-    speed=easy;
+    if(s==2){
+        speed=medium;
+        s=0;
+        easyButton.innerHTML="Medium";
+    }
+    else if(s==0){
+        speed=hard;
+        s=1;
+        easyButton.innerHTML="Hard";
+    }
+    else if(s==1){
+        speed=easy;
+        s=2;
+        easyButton.innerHTML="Easy";
+    }
 });
 
-mediumButton.addEventListener('click', function() {
-    speed=medium;
-});
-
-hardButton.addEventListener('click', function() {
-    speed=hard;
-});
 
 function main(ctime) {
     window.requestAnimationFrame(main);
