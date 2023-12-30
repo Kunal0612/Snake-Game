@@ -24,7 +24,7 @@ const scoreBox = document.getElementById('scoreBox');
 const Pause = document.getElementById('Pause');
 
 let f=0;
-musicSound.play();
+
 Pause.addEventListener('click', function() {
     if(f===0) {
         musicSound.pause();
